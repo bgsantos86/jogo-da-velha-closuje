@@ -17,23 +17,25 @@
 (defn le-letra! [] (read-line))
 (defn acertou? [chute palavra] (.contains palavra chute))
 
-(defn avalia-chute [chute vidas palavra acertos]
-    (if (acertou? chute palavra)
-        (jogo vidas palavra (conj acertos chute))
-        (jogo (dec vidas) palavra acertos)
-    )
-)
-
 ; objetivo: Função principal
 ; input: números de vidas (int), palavra a ser adivinhada (string), acertos (conjunto de caracteres/string)
 ; output: nulo
 (defn jogo [vidas palavra acertos]
-  (if (= vidas 0)   ; Se vidas for igual a zero
-    (perdeu)    ; chama a função perdeu
-    ; O segundo bloco já é o else.
-    (if (acertou-a-palavra-toda? palavra acertos)   ; chama função que verifica se a palavra toda está certa
-      (ganhou)
-      (avalia-chute (le-letra!) vidas palavra acertos)
+  (cond 
+    (= vidas 0) (perdeu)    ; Se vidas for igual a zero / chama a função perdeu
+    (acertou-a-palavra-toda? palavra acertos) (ganhou) ; chama função que verifica se a palavra toda está certa
+    :else
+    (let [chute (le-letra!)]
+      (if (acertou? chute palavra)
+        (do
+          (println "Você acertou!")
+          (recur vidas palavra (conj acertos chute))
+        )
+        (do
+          (println "Você errou!")
+          (recur (dec vidas) palavra acertos)
+        )
+      )
     )
   )
 )
