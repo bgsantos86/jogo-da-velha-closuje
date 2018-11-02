@@ -18,11 +18,12 @@
 (defn acertou? [chute palavra] (.contains palavra chute))
 
 (defn avalia-chute [chute vidas palavra acertos]
-  (if (acertou? chute palavra)
-    (jogo vidas palavra (conj acertos chute))
-    (jogo (dec vidas) palavra acertos)
-  )
+    (if (acertou? chute palavra)
+        (jogo vidas palavra (conj acertos chute))
+        (jogo (dec vidas) palavra acertos)
+    )
 )
+
 ; objetivo: Função principal
 ; input: números de vidas (int), palavra a ser adivinhada (string), acertos (conjunto de caracteres/string)
 ; output: nulo
