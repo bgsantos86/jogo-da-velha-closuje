@@ -17,10 +17,22 @@
 (defn le-letra! [] (read-line))
 (defn acertou? [chute palavra] (.contains palavra chute))
 
+(defn imprime-forca [vidas palavra acertos]
+  (println "Vidas " vidas)
+  (doseq [letra (seq palavra)] 
+    (if (contains? acertos (str letra))
+      (print letra " ") 
+      (print "_" " ")
+    )
+  )
+  (println)
+)
+
 ; objetivo: Função principal
 ; input: números de vidas (int), palavra a ser adivinhada (string), acertos (conjunto de caracteres/string)
 ; output: nulo
 (defn jogo [vidas palavra acertos]
+  (imprime-forca vidas palavra acertos)
   (cond 
     (= vidas 0) (perdeu)    ; Se vidas for igual a zero / chama a função perdeu
     (acertou-a-palavra-toda? palavra acertos) (ganhou) ; chama função que verifica se a palavra toda está certa
