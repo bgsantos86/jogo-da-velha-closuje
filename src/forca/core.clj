@@ -52,7 +52,8 @@
   )
 )
 
+(defn comeca-o-jogo [] (jogo total-de-vidas "banana" #{}))
+
 (defn -main
-  "I don't do a whole lot ... yet."
   [& args]
-  (println "Hello, World!"))
+  (comeca-o-jogo))
